@@ -5,7 +5,14 @@ const config = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        logo: "#83578F",
+      },
+      fontFamily: {
+        logo: ["'Pattaya'", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };
