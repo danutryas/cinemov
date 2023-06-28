@@ -1,7 +1,6 @@
 import { NextPage } from "next";
 import Head from "next/head";
 
-import LandingPageTemplate from "../templates/LandingPage/LandingPageTemplate";
 import { signIn, signOut, useSession, getSession } from "next-auth/react";
 
 export async function getServerSideProps(context: any) {
@@ -35,7 +34,6 @@ const Index: NextPage = () => {
         </div>
       )}
       {/* <LandingPageTemplate /> */}
-
     </>
   );
 };
