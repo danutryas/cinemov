@@ -1,4 +1,5 @@
 import { Header } from "@/components";
+import ConfirmDelete from "@/components/modal/confirmDelete";
 import Head from "next/head";
 import React from "react";
 

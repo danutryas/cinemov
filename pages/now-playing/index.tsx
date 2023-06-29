@@ -1,15 +1,27 @@
 import { Header } from "@/components";
+
 import { MovieCard } from "@/components/card/card";
+
+import { db } from "@/lib/firebase/firebase.config";
+import { getSession } from "next-auth/react";
+
 import Head from "next/head";
+import { useEffect } from "react";
 
 // list of movie
-export async function getServerSideProps() {
-  // Fetch data from external API
-  const res = await fetch(`https://seleksi-sea-2023.vercel.app/api/movies`);
-  const data = await res.json();
+// export async function getServerSideProps(context: any) {
+//   // Fetch data from external API
+//   const session = await getSession(context);
+//   let data = db
+//     .collection("balance")
+//     .doc()
+//     .get()
+//     .then((res) => {
+//       return res.data();
+//     });
 
-  return { props: { data } };
-}
+//   return { props: { data } };
+// }
 
 interface NowPlayingProps {
   data: any;
@@ -17,7 +29,9 @@ interface NowPlayingProps {
 
 const NowPlaying = (props: NowPlayingProps) => {
   const { data } = props;
+
   console.log(data);
+
   return (
     <>
       <Head>
