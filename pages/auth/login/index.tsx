@@ -1,102 +1,117 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+// import Link from "@mui/material/Link";
+import { Button } from "@/components";
+import Link from "next/link";
+import { FcGoogle } from "react-icons/fc";
+import { signIn } from "next-auth/react";
 
-const defaultTheme = createTheme();
+interface signIn {
+  children: React.ReactNode;
+  onClick?: () => void;
+}
+
+const SignInProvider = ({
+  children,
+  onClick,
+}: React.PropsWithChildren<signIn>) => {
+  return (
+    <Button
+      className="w-full rounded-md  flex h-10 justify-center items-center p-0 hover:bg-gray-100 hover:border-gray-300"
+      onClick={onClick}
+      type="outlined"
+    >
+      {children}
+    </Button>
+  );
+};
 
 const LoginPage = () => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    signIn("Sign In", {
+      email: data.get("email"),
+      password: data.get("password"),
+    });
+
     console.log({
       email: data.get("email"),
       password: data.get("password"),
     });
   };
+  const onSignIn = (provider: string, callbackUrl = "") => {
+    signIn(provider, {
+      callbackUrl: `http://localhost:3000${callbackUrl}`,
+    });
+  };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              className="bg-blue text-white"
-              sx={{ mt: 3, mb: 2 }}
+    <div className="container max-w-sm mx-auto mt-6">
+      <div className="flex flex-col items-center ">
+        <div className="flex flex-col gap-2 w-full mb-10">
+          <h4 className="font-normal text-2xl text-[#212529] tracking-wider">
+            Sign in to Cinemov
+          </h4>
+          <p className="text-[#637381] text-base font-medium">
+            Enter your details below.
+          </p>
+        </div>
+        <div className="w-full flex gap-3">
+          <SignInProvider onClick={() => onSignIn("google")}>
+            <FcGoogle size={18} />
+          </SignInProvider>
+          <SignInProvider>a</SignInProvider>
+          <SignInProvider>a</SignInProvider>
+          <SignInProvider>a</SignInProvider>
+        </div>
+        <div className="w-full h-10 justify-center flex relative items-center my-3">
+          <p className="text-[#637381] z-1 ">OR</p>
+        </div>
+        <form onSubmit={handleSubmit} className="w-full flex flex-col gap-6">
+          <TextField
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            autoFocus
+            color="secondary"
+          />
+          <TextField
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            color="secondary"
+          />
+          <div className="flex flex-col gap-4">
+            <Link
+              href=""
+              className="text-[#824179] hover:text-[#be72b4] text-sm font-medium"
             >
+              Foget password?
+            </Link>
+            <Button type="submit" fullWidth className="bg-blue text-white">
               Sign In
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
+          </div>
+          <div className="text-sm flex gap-1 justify-center">
+            <p className="font-medium">Not a member yet?</p>
+            <Link
+              href=""
+              className="text-[#824179] hover:text-[#be72b4] font-medium"
+            >
+              Sign up now
+            </Link>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 };
 export default LoginPage;

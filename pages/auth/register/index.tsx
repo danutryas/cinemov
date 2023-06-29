@@ -15,22 +15,22 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useRouter } from "next/router";
 import { getSession } from "next-auth/react";
 
-export async function getServerSideProps(context: any) {
-  const session = await getSession(context);
+// export async function getServerSideProps(context: any) {
+//   const session = await getSession(context);
 
-  if (!session?.user) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
+//   if (!session?.user) {
+//     return {
+//       redirect: {
+//         destination: "/",
+//         permanent: false,
+//       },
+//     };
+//   }
 
-  return {
-    props: { session },
-  };
-}
+//   return {
+//     props: { session },
+//   };
+// }
 
 const defaultTheme = createTheme();
 
