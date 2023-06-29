@@ -1,13 +1,16 @@
 import { AppProps } from "next/app";
 import "../styles/globals.css";
 import Layout from "./Layout";
+import ModalLayout from "@/lib/hooks/useModal";
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <ModalLayout>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ModalLayout>
     </>
   );
 };

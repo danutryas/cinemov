@@ -1,8 +1,17 @@
 import { Header } from "@/components";
+import { useModal } from "@/lib/hooks/useModal";
 import Head from "next/head";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function Layout({ children }: React.PropsWithChildren<{}>) {
+  const { isActiveModal, setInActiveModal } = useModal();
+  useEffect(() => {
+    if (isActiveModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [isActiveModal]);
   return (
     <>
       <Head>
@@ -11,6 +20,15 @@ export default function Layout({ children }: React.PropsWithChildren<{}>) {
       </Head>
       <Header />
       <div className="container mx-auto px-5 max-w-screen-2xl">{children}</div>
+      <div
+        className={`${
+          isActiveModal
+            ? "fixed w-screen h-screen top-0 left-0 right-0 bottom-0 bg-[rgba(0,0,0,0.5)] z-100 cursor-pointer"
+            : "hidden"
+        }`}
+        onClick={setInActiveModal}
+      ></div>
+      {/* </div> */}
     </>
   );
 }
