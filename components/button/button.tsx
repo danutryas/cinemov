@@ -1,4 +1,5 @@
 import { Children, cloneElement, ReactNode, useState } from "react";
+import { twMerge } from "tw-merge";
 
 interface ButtonProps {
   onClick?: Function | VoidFunction;
@@ -11,9 +12,11 @@ interface ButtonProps {
     | "red"
     | "yellow"
     | "purple"
+    | "outlined"
     | "submit";
   children: ReactNode;
   className?: string;
+  fullWidth?: boolean;
 }
 
 const Button = ({
@@ -21,21 +24,29 @@ const Button = ({
   children,
   onClick,
   className,
+  fullWidth = false,
 }: ButtonProps) => {
-  const getClassName = () => {
+  const typeClassName = () => {
     switch (type) {
       case "red":
-        return `flex flex-row justify-center items-center gap-2 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 ${className}`;
+        return `flex flex-row justify-center items-center gap-2 focus:outline-none text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-red-600 dark:hover:bg-red-700  ${className}`;
+      case "outlined":
+        return ` flex flex-row justify-center items-center gap-2 font-medium rounded-lg text-sm px-4 py-2.5 bg-transparent text- border-gray-200 border text-gray-500 `;
       case "alternative":
-        return `flex flex-row justify-center items-center py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-1 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 ${className}`;
+        return `flex flex-row justify-center items-center py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10  dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 ${className}`;
       default:
-        return `flex flex-row justify-center items-center gap-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 ${className}`;
+        return `flex flex-row justify-center items-center gap-2 text-white bg-[#824179] hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-[#824179] dark:hover:bg-[#733865] focus:outline-none  ${className}`;
     }
   };
-
+  const widthClassName = () => {
+    if (fullWidth) {
+      return "w-full rounded-md";
+    }
+    return "";
+  };
   return (
     <button
-      type={type === "submit" ? "submit" : "reset"}
+      type={type === "submit" ? "submit" : "button"}
       onClick={(e) => {
         if (type !== "submit") {
           e.preventDefault();
@@ -44,8 +55,10 @@ const Button = ({
           onClick();
         }
       }}
-      // className={twMerge(getClassName() + " " + className)}
-      className={`${getClassName()} ${className}`}
+      className={twMerge(
+        typeClassName() + " " + className + " " + widthClassName()
+      )}
+      // className={  `${getClassName()} ${fullWidth ? "w-full rounded-md" : ""}`}
     >
       {Children.map(children, (child) => {
         return child;

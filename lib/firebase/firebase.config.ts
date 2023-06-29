@@ -11,10 +11,16 @@ const firebaseConfig = {
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
+const app = !firebase.apps.length
+  ? firebase.initializeApp(firebaseConfig)
+  : firebase.app();
 
-const app = firebase.apps[0]
-  ? firebase.app
-  : firebase.initializeApp(firebaseConfig);
+const db = app.firestore();
 
-const db = getFirestore(firebase.initializeApp(firebaseConfig));
-export { app, db };
+const auth = app.auth();
+// export type SnapshotType = firebase.firestore.DocumentData;
+// export type TimestampType = firebase.firestore.Timestamp;
+// export type FieldValueType = firebase.firestore.FieldValue;
+// export type QuerySnapshotType = firebase.firestore.DocumentSnapshot;
+
+export { app, db, auth };
