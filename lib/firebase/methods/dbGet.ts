@@ -110,3 +110,15 @@ export const getShowtimeById = (id: string) => {
     });
   return data;
 };
+export const getMoviePlayByMovieId = (id: string) => {
+  let data = db
+    .collection("movie-play")
+    .where("movieId", "==", id)
+    .get()
+    .then((res) => {
+      return res.docs.map((doc) => {
+        return doc.data();
+      });
+    });
+  return data;
+};
