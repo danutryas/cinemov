@@ -30,18 +30,6 @@ export const getBalance = (uid: string) => {
     .then((snapshot) => {
       return snapshot.data();
     });
-
-  return data;
-};
-export const getMovie = () => {
-  let data = db
-    .collection("movies")
-    .get()
-    .then((res) => {
-      return res.docs.map((doc) => {
-        return { ...doc.data(), id: doc.id };
-      });
-    });
   return data;
 };
 export const getTransaction = (uid: string) => {
@@ -97,28 +85,6 @@ export const getMovieById = (id: string) => {
     .get()
     .then((res) => {
       return res.data();
-    });
-  return data;
-};
-export const getShowtimeById = (id: string) => {
-  let data = db
-    .collection("showtime")
-    .doc(id)
-    .get()
-    .then((res) => {
-      return res.data();
-    });
-  return data;
-};
-export const getMoviePlayByMovieId = (id: string) => {
-  let data = db
-    .collection("movie-play")
-    .where("movieId", "==", id)
-    .get()
-    .then((res) => {
-      return res.docs.map((doc) => {
-        return doc.data();
-      });
     });
   return data;
 };
