@@ -5,7 +5,7 @@ export interface LogoCinemov {
   text?: boolean;
 }
 export interface IAvatar {
-  imgSrc: string | null;
+  imgSrc: string | null | undefined;
   height?: number;
   width?: number;
 }
