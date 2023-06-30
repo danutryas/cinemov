@@ -8,7 +8,7 @@ import { signIn } from "next-auth/react";
 
 interface signIn {
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (e: any) => void;
 }
 
 const SignInProvider = ({
@@ -40,7 +40,8 @@ const LoginPage = () => {
       password: data.get("password"),
     });
   };
-  const onSignIn = (provider: string, callbackUrl = "") => {
+  const onSignIn = (e: any, provider: string, callbackUrl = "") => {
+    e.preventDefault();
     signIn(provider, {
       callbackUrl: `http://localhost:3000${callbackUrl}`,
     });
@@ -58,7 +59,7 @@ const LoginPage = () => {
           </p>
         </div>
         <div className="w-full flex gap-3">
-          <SignInProvider onClick={() => onSignIn("google")}>
+          <SignInProvider onClick={(e: any) => onSignIn(e, "google")}>
             <FcGoogle size={18} />
           </SignInProvider>
           <SignInProvider>a</SignInProvider>
