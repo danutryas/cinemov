@@ -5,7 +5,33 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import "swiper/css";
 
-const Index: NextPage = () => {
+import { getSession, useSession } from "next-auth/react";
+import {
+  createBalance,
+  getAccount,
+  getBalance,
+  getMovie,
+  getUser,
+} from "@/lib/firebase/db";
+import { useEffect } from "react";
+import useUser from "@/lib/hooks/useUser";
+import useData from "@/lib/hooks/useMovies";
+import { getBooked } from "@/lib/firebase/methods/dbGet";
+import useBooked from "@/lib/hooks/useBooked";
+
+const Index = () => {
+  // const { movies } = useData();
+  const { user } = useUser();
+  const {} = useBooked();
+
+  useEffect(() => {
+    if (user) {
+      const data = getBooked(user?.id);
+      if (data) {
+        data.then((res) => {});
+      }
+    }
+  }, [user]);
   return (
     <>
       <Head>
