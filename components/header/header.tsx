@@ -14,9 +14,25 @@ const Header = () => {
     <header className="bg-white ">
       <div className="container mx-auto px-5 max-w-screen-2xl">
         <nav className="flex justify-between items-center py-4">
-          <Link className="text-xl font-semibold" href="/">
-            <LogoCinemov width={30} height={30} text />
-          </Link>
+          <div className="flex gap-9 items-center">
+            <Link href="/">
+              <LogoCinemov width={48} height={48} text />
+            </Link>
+            <div className="flex gap-2">
+              <Link
+                className="text-lg text-gray-600 hover:text-gray-900 py-2 px-4"
+                href="/now-playing"
+              >
+                NOW PLAYING
+              </Link>
+              <Link
+                className="text-lg text-gray-600 hover:text-gray-900 py-2 px-4"
+                href="/schedule"
+              >
+                SCHEDULE
+              </Link>
+            </div>
+          </div>
           <div className="relative flex justify-end">
             {isLoggedIn ? (
               <>
@@ -66,13 +82,13 @@ const Header = () => {
                         className="w-5 mr-2"
                         fill="none"
                         stroke="currentColor"
-                        stroke-width="1.5"
+                        strokeWidth="1.5"
                         viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true"
                       >
                         <path
-                          stroke-linecap="round"
+                          strokeLinecap="round"
                           strokeLinejoin="round"
                           d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
                         ></path>
