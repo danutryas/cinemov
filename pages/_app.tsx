@@ -7,7 +7,6 @@ import ModalLayout from "@/lib/hooks/useModal";
 const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
   return (
     <>
-
       <SessionProvider session={session}>
         <ModalLayout>
           <Layout>
@@ -15,12 +14,6 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
           </Layout>
         </ModalLayout>
       </SessionProvider>
-
-
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-
     </>
   );
 };
