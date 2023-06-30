@@ -1,20 +1,50 @@
-import { useEffect, useState } from "react";
-import { getBalance, getMovie, getUser } from "../firebase/db";
+import { useEffect, useState, useCallback } from "react";
 import { useSession } from "next-auth/react";
-import { DocumentData } from "firebase/firestore";
-import { set } from "react-hook-form";
+import { Movie } from "@/types/interface";
+import { db } from "../firebase/firebase.config";
 
+export const defaultMovie: Movie = {
+  id: "",
+  age_rating: 0,
+  description: "",
+  poster_url: "",
+  release_date: "",
+  ticket_price: 0,
+  title: "",
+  trailer_url: "",
+};
 // get user data
 export default function useMovies() {
-  const session = useSession() as any;
-  const [movies, setMovies] = useState<any>(undefined);
-  const dbMovie = getMovie();
+  const [movies, setMovies] = useState<Movie[]>([defaultMovie]);
 
-  useEffect(() => {
-    dbMovie.then((res) => {
+  const getMovieById = useCallback(async (id: string) => {
+    let data = db
+      .collection("movies")
+      .doc(id)
+      .get()
+      .then((res) => {
+        return res.data();
+      });
+    return data;
+  }, []);
+
+  const getMovies = useCallback(async () => {
+    let data = db
+      .collection("movies")
+      .get()
+      .then((res) => {
+        return res.docs.map((doc) => {
+          return { ...doc.data(), id: doc.id };
+        });
+      });
+    data.then((res: any) => {
       setMovies(res);
     });
-  }, [session]);
+  }, []);
 
-  return { movies };
+  useEffect(() => {
+    getMovies();
+  }, []);
+
+  return { movies, getMovieById };
 }
