@@ -6,6 +6,7 @@ type MovieCardProps = {
   title: string;
   imgUrl: string;
   id: string;
+  trailerUrl: string;
 };
 
 export const MovieCard = (props: MovieCardProps) => {
@@ -25,9 +26,7 @@ export const MovieCard = (props: MovieCardProps) => {
         </p>
         <Button
           type="alternative"
-          onClick={() =>
-            setActiveModal("https://www.youtube.com/embed/u3V5KDHRQvk")
-          }
+          onClick={() => setActiveModal(props.trailerUrl)}
           className="z-100"
         >
           Watch Trailer

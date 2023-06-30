@@ -9,12 +9,14 @@ export type WithOutToken = {
 };
 
 export type Movie = {
+  id: string;
   age_rating: number;
-  desciption: string;
+  description: string;
   poster_url: string;
   release_date: string;
   ticket_price: number;
   title: string;
+  trailer_url: string;
 };
 export type Account = {
   access_token: string;
