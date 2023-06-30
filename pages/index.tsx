@@ -13,21 +13,19 @@ import { useEffect } from "react";
 import useUser from "@/lib/hooks/useUser";
 import useData from "@/lib/hooks/useMovies";
 import { getBooked } from "@/lib/firebase/methods/dbGet";
-import useBooked from "@/lib/hooks/useBooked";
-
+import useMovies from "@/lib/hooks/useMovies";
 const Index = () => {
-  // const { movies } = useData();
+  const { movies } = useMovies();
   const { user } = useUser();
-  const {} = useBooked();
 
   useEffect(() => {
-    if (user) {
-      const data = getBooked(user?.id);
-      if (data) {
-        data.then((res) => {});
-      }
-    }
-  }, [user]);
+    // if (user) {
+    //   const data = getBooked(user?.id);
+    //   if (data) {
+    //     data.then((res) => {});
+    //   }
+    // }
+  }, [movies]);
   return (
     <>
       <Head>
