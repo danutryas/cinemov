@@ -61,14 +61,3 @@ export const updateBalance = (uid: string, amount: number) => {
     });
   return data;
 };
-export const getMovie = () => {
-  let data = db
-    .collection("movies")
-    .get()
-    .then((res) => {
-      return res.docs.map((doc) => {
-        return { ...doc.data(), id: doc.id };
-      });
-    });
-  return data;
-};
