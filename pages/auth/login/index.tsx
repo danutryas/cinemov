@@ -1,7 +1,7 @@
 import * as React from "react";
 import TextField from "@mui/material/TextField";
 // import Link from "@mui/material/Link";
-import { Button } from "@/components";
+import Button from "@/components/button/button";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import { signIn } from "next-auth/react";
