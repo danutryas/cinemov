@@ -50,3 +50,15 @@ export type Booked = {
 export type Balance = {
   amount: number;
 };
+export interface User {
+  name: string;
+  email: string;
+  image: string;
+  id: string;
+}
+export interface UserData extends Balance {
+  name: string;
+  email: string;
+  image: string;
+  id: string;
+}
