@@ -29,7 +29,7 @@ const NowPlaying = (props: NowPlayingProps) => {
             key={id}
             imgUrl={movie.poster_url}
             title={movie.title}
-            id={id.toString()}
+            id={movie.id}
             trailerUrl={movie.trailer_url}
           />
         ))}

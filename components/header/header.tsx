@@ -10,7 +10,7 @@ import { getSession, signIn, signOut, useSession } from "next-auth/react";
 import { log } from "console";
 import ConfirmDelete from "../modal/confirmDelete";
 import { app } from "@/lib/firebase/firebase.config";
-import { getAccount, getBalance } from "@/lib/firebase/db";
+// import { getAccount, getBalance } from "@/lib/firebase/db";
 import useUser from "@/lib/hooks/useUser";
 
 interface ProfileSection {
@@ -20,25 +20,13 @@ interface ProfileSection {
         name?: string | null | undefined;
         email?: string | null | undefined;
         image?: string | null | undefined;
-        balance?: number | null | undefined;
+        amount?: number | null | undefined;
       }
     | undefined;
 }
 
 const ProfileSection = ({ isOpen, user }: ProfileSection) => {
-  const router = useRouter();
-  const [userBalance, setUserBalance] = useState("Rp0");
   const [confirmLogoutModal, setConfirmLogoutModal] = useState(false);
-  useEffect(() => {
-    if (typeof user?.balance === "number")
-      setUserBalance(
-        Intl.NumberFormat("id-ID", {
-          style: "currency",
-          currency: "IDR",
-          minimumFractionDigits: 0,
-        }).format(user?.balance)
-      );
-  }, [user]);
 
   return (
     <>
@@ -65,7 +53,15 @@ const ProfileSection = ({ isOpen, user }: ProfileSection) => {
         </section>
         <hr className="my-3" />
         <section className="flex justify-between items-center">
-          <p className="font-medium text-gray-700">{userBalance}</p>
+          <p className="font-medium text-gray-700">
+            {user?.amount
+              ? Intl.NumberFormat("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                  minimumFractionDigits: 0,
+                }).format(user.amount)
+              : "Rp0"}
+          </p>
           <Button>Deposit</Button>
         </section>
         <hr className="mb-5 mt-3" />
@@ -76,6 +72,7 @@ const ProfileSection = ({ isOpen, user }: ProfileSection) => {
           </p>
         </section>
       </section>
+
       <ConfirmDelete
         showModal={confirmLogoutModal}
         setShowModal={setConfirmLogoutModal}
@@ -87,7 +84,6 @@ const ProfileSection = ({ isOpen, user }: ProfileSection) => {
 
 const Header = () => {
   const router = useRouter();
-  const { data: session } = useSession();
   const [profileOpen, setProfileOpen] = useState(false);
   const { user } = useUser();
 

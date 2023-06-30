@@ -2,17 +2,8 @@ import { useEffect, useState, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { Movie } from "@/types/interface";
 import { db } from "../firebase/firebase.config";
+import { defaultMovie } from "../defaultValue";
 
-export const defaultMovie: Movie = {
-  id: "",
-  age_rating: 0,
-  description: "",
-  poster_url: "",
-  release_date: "",
-  ticket_price: 0,
-  title: "",
-  trailer_url: "",
-};
 // get user data
 export default function useMovies() {
   const [movies, setMovies] = useState<Movie[]>([defaultMovie]);
