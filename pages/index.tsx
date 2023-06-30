@@ -1,35 +1,7 @@
 import HomeBanner from "@/components/homepage/banner";
-import { NextPage } from "next";
 import Head from "next/head";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
-import "swiper/css";
 
-import { getSession, useSession } from "next-auth/react";
-import {
-  createBalance,
-  getAccount,
-  getBalance,
-  getMovie,
-  getUser,
-} from "@/lib/firebase/db";
-import { useEffect } from "react";
-import useUser from "@/lib/hooks/useUser";
-import useData from "@/lib/hooks/useMovies";
-import { getBooked } from "@/lib/firebase/methods/dbGet";
-import useMovies from "@/lib/hooks/useMovies";
 const Index = () => {
-  const { movies } = useMovies();
-  const { user } = useUser();
-
-  useEffect(() => {
-    // if (user) {
-    //   const data = getBooked(user?.id);
-    //   if (data) {
-    //     data.then((res) => {});
-    //   }
-    // }
-  }, [movies]);
   return (
     <>
       <Head>
