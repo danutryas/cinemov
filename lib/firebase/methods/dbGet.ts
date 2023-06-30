@@ -22,16 +22,7 @@ export const getAccount = (uid: string | undefined | null) => {
     });
   return data;
 };
-export const getBalance = (uid: string) => {
-  const data = db
-    .collection("balance")
-    .doc(uid)
-    .get()
-    .then((snapshot) => {
-      return snapshot.data();
-    });
-  return data;
-};
+
 export const getTransaction = (uid: string) => {
   let data = db
     .collection("transaction")
