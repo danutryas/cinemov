@@ -4,15 +4,9 @@ import { DocumentData } from "firebase/firestore";
 import { set } from "react-hook-form";
 import { db } from "../firebase/firebase.config";
 import { Balance, User, UserData } from "@/types/interface";
+import { defaultUser } from "../defaultValue";
 
 // get user data
-const defaultUser: UserData = {
-  name: "",
-  email: "",
-  image: "",
-  id: "",
-  amount: 0,
-};
 
 export default function useUser() {
   const [user, setUser] = useState<UserData>(defaultUser);

@@ -15,7 +15,7 @@ export const MovieCard = (props: MovieCardProps) => {
   return (
     <div className="w-[285px] h-[412px] bg-[#313131] flex rounded-[14px] items-center justify-center text-white relative group hover:scale-105 transition duration-200 ease-in-out z-1">
       <img
-        onClick={() => router.push(`/movie/${props.id}`)}
+        onClick={() => router.push(`/schedule/${props.id}`)}
         src={props.imgUrl}
         alt=""
         className="w-full h-full object-cover absolute rounded-2xl group-hover:blur-sm group-hover:opacity-50  p-[4px] z-1 transition duration-200 ease-in-out cursor-pointer "

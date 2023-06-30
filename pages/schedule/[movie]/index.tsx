@@ -1,5 +1,6 @@
+import { defaultMovie } from "@/lib/defaultValue";
 import { db } from "@/lib/firebase/firebase.config";
-import useMovies, { defaultMovie } from "@/lib/hooks/useMovies";
+import useMovies from "@/lib/hooks/useMovies";
 import { Movie } from "@/types/interface";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";

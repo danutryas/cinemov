@@ -1,5 +1,6 @@
 import EmbedVideo from "@/components/modal/embedVideo";
 import { ReactNode, createContext, useContext, useState } from "react";
+import { defaultUrl } from "../defaultValue";
 type ModalContext = {
   isActiveModal: boolean;
   setActiveModal: (url: string) => void;
@@ -17,7 +18,6 @@ export const useModal = () => useContext(ModalContext);
 type ModalLayoutProps = {
   children: ReactNode;
 };
-const defaultUrl = "https://www.youtube.com/embed/";
 
 const ModalLayout = ({ children }: ModalLayoutProps) => {
   const [isActiveModal, setIsActiveModal] = useState(false);
