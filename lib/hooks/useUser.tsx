@@ -1,38 +1,41 @@
-import { useEffect, useState } from "react";
-import { getBalance, getUser } from "../firebase/db";
+import { useEffect, useState, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { DocumentData } from "firebase/firestore";
 import { set } from "react-hook-form";
+import { db } from "../firebase/firebase.config";
+import { Balance, User, UserData } from "@/types/interface";
 
 // get user data
+const defaultUser: UserData = {
+  name: "",
+  email: "",
+  image: "",
+  id: "",
+  amount: 0,
+};
 
 export default function useUser() {
-  const [user, setUser] = useState<DocumentData | undefined>(undefined);
+  const [user, setUser] = useState<UserData>(defaultUser);
   const session = useSession() as any;
-  const getUserBalance = getBalance(session?.data?.user?.id);
-
+  // const getUserBalance = getBalance(session?.data?.user?.id);
+  const getUserBalance = useCallback(async (user: User) => {
+    await db
+      .collection("balance")
+      .doc(user.id)
+      .get()
+      .then((snapshot) => {
+        setUser({
+          name: user.name,
+          email: user.email,
+          image: user.image,
+          id: user.id,
+          amount: snapshot.data()?.amount,
+        });
+      });
+  }, []);
   useEffect(() => {
     if (session.data) {
-      setUser(session.data.user);
-      if (getUserBalance) {
-        getUserBalance.then((res) => {
-          if (res) {
-            setUser((prev) => {
-              return {
-                ...prev,
-                balance: res.amount,
-              };
-            });
-          } else {
-            setUser((prev) => {
-              return {
-                ...prev,
-                balance: 0,
-              };
-            });
-          }
-        });
-      }
+      getUserBalance(session.data.user);
     }
   }, [session]);
   return { user };
