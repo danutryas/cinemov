@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { FirestoreAdapter } from "@auth/firebase-adapter";
-import { db } from "@/lib/firebase/firebase.config";
+import { dbAdmin } from "@/lib/firebase/firebaseAdmin.config";
 import * as firestoreFunctions from "firebase/firestore";
 
 export default NextAuth({
@@ -28,22 +28,13 @@ export default NextAuth({
     // }),
   ],
   callbacks: {
-    // session: async ({ session, user }) => {
-    //   if (session?.user) {
-    //     session.user.id = user.id;
-    //   }
-    //   return session;
-    // },
-    async session({ session, user }) {
+    session: async ({ session, user }) => {
       if (session?.user) {
         session.user.id = user.id;
       }
       return session;
     },
   },
-  adapter: FirestoreAdapter({ db, ...firestoreFunctions }),
-  pages: {
-    signIn: "/auth/login",
-  },
+  adapter: FirestoreAdapter(dbAdmin),
   secret: process.env.NEXTAUTH_SECRET,
 });
