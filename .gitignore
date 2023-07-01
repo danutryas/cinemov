@@ -37,3 +37,4 @@ next-env.d.ts
 
 /cinemov-compfest-firebase-adminsdk.json
 /archieve
+.vercel

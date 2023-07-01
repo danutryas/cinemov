@@ -1,16 +1,12 @@
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import LogoCinemov from "../logo/logo";
 import Button from "../button/button";
 import Avatar from "../avatar/Avatar";
 import { ExitIcon } from "@/lib/assets/icons";
-import { getSession, signIn, signOut, useSession } from "next-auth/react";
-import { log } from "console";
+import { signOut, useSession } from "next-auth/react";
 import ConfirmDelete from "../modal/confirmDelete";
-import { app } from "@/lib/firebase/firebase.config";
-// import { getAccount, getBalance } from "@/lib/firebase/db";
 import useUser from "@/lib/hooks/useUser";
 
 interface ProfileSection {

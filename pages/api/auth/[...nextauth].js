@@ -1,11 +1,9 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { FirestoreAdapter } from "@auth/firebase-adapter";
-import { db } from "@/lib/firebase/firebase.config";
+import { dbAdmin } from "@/lib/firebase/firebaseAdmin.config";
 import * as firestoreFunctions from "firebase/firestore";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default NextAuth({
   providers: [
@@ -37,9 +35,6 @@ export default NextAuth({
       return session;
     },
   },
-  adapter: FirestoreAdapter({ db, ...firestoreFunctions }),
-  pages: {
-    signIn: "/auth/login",
-  },
+  adapter: FirestoreAdapter(dbAdmin),
   secret: process.env.NEXTAUTH_SECRET,
 });

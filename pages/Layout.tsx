@@ -1,6 +1,5 @@
 import { useModal } from "@/lib/hooks/useModal";
 import Header from "@/components/header/header";
-import ConfirmDelete from "@/components/modal/confirmDelete";
 import Head from "next/head";
 import React, { useEffect } from "react";
 

@@ -1,6 +1,4 @@
 import { useModal } from "@/lib/hooks/useModal";
-import Button from "../button/button";
-import { useCallback, useEffect } from "react";
 
 type EmbedVideoProps = {
   src: string;

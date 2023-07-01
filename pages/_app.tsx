@@ -4,10 +4,10 @@ import { SessionProvider } from "next-auth/react";
 import Layout from "./Layout";
 import ModalLayout from "@/lib/hooks/useModal";
 
-const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
+const App = ({ Component, pageProps }: AppProps) => {
   return (
     <>
-      <SessionProvider session={session}>
+      <SessionProvider session={pageProps.session}>
         <ModalLayout>
           <Layout>
             <Component {...pageProps} />

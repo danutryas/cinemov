@@ -1,13 +1,10 @@
-import { Movie } from "@/types/interface";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Button from "../button/button";
 import { HiArrowNarrowRight } from "react-icons/hi";
 import Image from "next/image";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
-import { Skeleton } from "../ui/skeleton";
 import useMovies from "@/lib/hooks/useMovies";
 import { useModal } from "@/lib/hooks/useModal";
 import { useRouter } from "next/router";

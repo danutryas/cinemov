@@ -13,29 +13,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useRouter } from "next/router";
-import { getSession } from "next-auth/react";
-
-// export async function getServerSideProps(context: any) {
-//   const session = await getSession(context);
-
-//   if (!session?.user) {
-//     return {
-//       redirect: {
-//         destination: "/",
-//         permanent: false,
-//       },
-//     };
-//   }
-
-//   return {
-//     props: { session },
-//   };
-// }
 
 const defaultTheme = createTheme();
 
 const RegisterPage = () => {
-  const router = useRouter();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
