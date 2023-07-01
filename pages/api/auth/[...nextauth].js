@@ -19,28 +19,10 @@ export default NextAuth({
         },
         password: { label: "Password", type: "password", placeholder: "***" },
       },
-      // async authorize(credentials) {
-      //   if (!credentials || !credentials.email || !credentials.password)
-      //     return null;
-      //   const auth = useAuth();
-      //   createUserWithEmailAndPassword(
-      //     auth,
-      //     credentials.email,
-      //     credentials.password
-      //   )
-      //     .then((userCredential) => {
-      //       const user = userCredential.user;
-      //       return user;
-      //     })
-      //     .catch((error) => {
-      //       const errorCode = error.code;
-      //       const errorMessage = error.message;
-      //     });
-      // },
     }),
     GoogleProvider({
-      clientId: process.env.NEXT_GOOGLE_ID,
-      clientSecret: process.env.NEXT_GOOGLE_SECRET,
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
     }),
     // GitHubProvider({
     //   clientId: process.env.GITHUB_ID,
