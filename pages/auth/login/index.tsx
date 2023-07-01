@@ -20,7 +20,7 @@ const SignInProvider = ({
   const onSignIn = (e: any) => {
     e.preventDefault();
     signIn(provider, {
-      callbackUrl: `http://localhost:3000${callbackUrl}`,
+      callbackUrl: `https://cinemov.vercel.app${callbackUrl}`,
     });
   };
   return (
