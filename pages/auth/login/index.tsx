@@ -47,6 +47,11 @@ const LoginPage = () => {
       password: data.get("password"),
     });
   };
+  const onSignIn = (provider: string, callbackUrl = "") => {
+    signIn(provider, {
+      callbackUrl: `http://localhost:3000${callbackUrl}`,
+    });
+  };
 
   return (
     <div className="container max-w-sm mx-auto mt-6">
