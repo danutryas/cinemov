@@ -18,9 +18,5 @@ const app = !firebase.apps.length
 const db = app.firestore();
 
 const auth = app.auth();
-// export type SnapshotType = firebase.firestore.DocumentData;
-// export type TimestampType = firebase.firestore.Timestamp;
-// export type FieldValueType = firebase.firestore.FieldValue;
-// export type QuerySnapshotType = firebase.firestore.DocumentSnapshot;
 
 export { app, db, auth };

@@ -5,7 +5,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { FirestoreAdapter } from "@auth/firebase-adapter";
 import { db } from "@/lib/firebase/firebase.config";
 import * as firestoreFunctions from "firebase/firestore";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export default NextAuth({
   providers: [
@@ -24,10 +23,6 @@ export default NextAuth({
       clientId: process.env.NEXT_PUBLIC_GOOGLE_ID,
       clientSecret: process.env.NEXT_PUBLIC_GOOGLE_SECRET,
     }),
-    // GitHubProvider({
-    //   clientId: process.env.NEXT_PUBLIC_GITHUB_ID,
-    //   clientSecret: process.env.NEXT_PUBLIC_GITHUB_SECRET,
-    // }),
   ],
   callbacks: {
     session: async ({ session, user }) => {
@@ -38,8 +33,8 @@ export default NextAuth({
     },
   },
   adapter: FirestoreAdapter({ db, ...firestoreFunctions }),
-  pages: {
-    signIn: "/auth/login",
-  },
+  // pages: {
+  //   signIn: "/auth/login",
+  // },
   secret: process.env.NEXTAUTH_SECRET,
 });
