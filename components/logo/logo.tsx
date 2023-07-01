@@ -1,4 +1,3 @@
-import MovieCreationIcon from "@mui/icons-material/MovieCreation";
 import Image from "next/image";
 import { LogoCinemov } from "../componentTypes";
 

@@ -1,11 +1,8 @@
 import { defaultMovie } from "@/lib/defaultValue";
-import { db } from "@/lib/firebase/firebase.config";
 import useMovies from "@/lib/hooks/useMovies";
 import { Movie } from "@/types/interface";
-import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { set } from "react-hook-form";
 
 const DetailMovie = () => {
   const { getMovieById } = useMovies();

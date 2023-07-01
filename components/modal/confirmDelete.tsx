@@ -1,16 +1,13 @@
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { Modal } from "flowbite-react";
-import { useRouter } from "next/router";
 import Button from "../button/button";
-import { useSession } from "next-auth/react";
+
 type DeleteLogModal = {
   showModal: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   onSubmit: () => void;
 };
 const ConfirmDelete = (props: DeleteLogModal) => {
-  const Router = useRouter();
-
   return (
     <Modal
       size="md"

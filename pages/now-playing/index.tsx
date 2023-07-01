@@ -1,15 +1,6 @@
-import { Header } from "@/components";
-
 import { MovieCard } from "@/components/card/card";
-
-import { db } from "@/lib/firebase/firebase.config";
 import useMovies from "@/lib/hooks/useMovies";
-import { Session } from "next-auth";
-import { getSession } from "next-auth/react";
-
 import Head from "next/head";
-import { useEffect } from "react";
-import Nextauth from "../api/auth/[...nextauth]";
 
 const NowPlaying = () => {
   const { movies } = useMovies();
