@@ -86,6 +86,7 @@ const Header = () => {
   const router = useRouter();
   const [profileOpen, setProfileOpen] = useState(false);
   const { user } = useUser();
+  const session = useSession();
 
   return (
     <header className="bg-white border-b-2 ">
@@ -111,7 +112,7 @@ const Header = () => {
             </div>
           </div>
           <div className="relative flex justify-end">
-            {user ? (
+            {session?.data ? (
               <>
                 <div
                   className="flex cursor-pointer"

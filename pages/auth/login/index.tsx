@@ -8,21 +8,28 @@ import { signIn } from "next-auth/react";
 
 interface signIn {
   children: React.ReactNode;
-  onClick?: () => void;
+  provider?: string;
+  callbackUrl?: string;
 }
 
 const SignInProvider = ({
   children,
-  onClick,
+  provider,
+  callbackUrl = "",
 }: React.PropsWithChildren<signIn>) => {
+  const onSignIn = (e: any) => {
+    e.preventDefault();
+    signIn(provider, {
+      callbackUrl: `http://localhost:3000${callbackUrl}`,
+    });
+  };
   return (
-    <Button
+    <button
       className="w-full rounded-md  flex h-10 justify-center items-center p-0 hover:bg-gray-100 hover:border-gray-300"
-      onClick={onClick}
-      type="outlined"
+      onClick={(e: any) => onSignIn(e)}
     >
       {children}
-    </Button>
+    </button>
   );
 };
 
@@ -58,7 +65,7 @@ const LoginPage = () => {
           </p>
         </div>
         <div className="w-full flex gap-3">
-          <SignInProvider onClick={() => onSignIn("google")}>
+          <SignInProvider provider="google">
             <FcGoogle size={18} />
           </SignInProvider>
           <SignInProvider>a</SignInProvider>
