@@ -76,8 +76,12 @@ const ScheduleMovieCard = ({ movie, showtime }: ScheduleMovieCard) => {
         </div>
         <div className="flex flex-col gap-2">
           {showtime
-            ? showtime.map((showtime) => (
-                <ShowtimeButton movieId={movie.id} showtimeId={showtime.id}>
+            ? showtime.map((showtime, index: number) => (
+                <ShowtimeButton
+                  movieId={movie.id}
+                  showtimeId={showtime.id}
+                  key={index}
+                >
                   {showtime.time}
                 </ShowtimeButton>
               ))
