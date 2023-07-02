@@ -1,12 +1,14 @@
 import ShowtimeButton from "@/components/button/showtimeButton";
 import useMovies from "@/lib/hooks/useMovies";
-import { Movie } from "@/types/interface";
+import useShowtime from "@/lib/hooks/useShowtime";
+import { Movie, Showtime } from "@/types/interface";
 import Image from "next/image";
 
 const ScheduleMovie = () => {
   const { movies } = useMovies();
   const firstMovies = movies ? movies.slice(0, movies.length / 2 + 1) : [];
   const secondMovies = movies ? movies.slice(movies.length / 2 + 1) : [];
+  const { showtime } = useShowtime();
   return (
     <div className="flex flex-col gap-8 mt-8">
       <div className="flex flex-col gap-6 items-center">
@@ -18,7 +20,11 @@ const ScheduleMovie = () => {
         <div className="grid grid-cols-3 gap-y-6 gap-x-6">
           {firstMovies
             ? firstMovies.map((movie, index) => (
-                <ScheduleMovieCard key={index} movie={movie} />
+                <ScheduleMovieCard
+                  key={index}
+                  movie={movie}
+                  showtime={showtime}
+                />
               ))
             : null}
         </div>
@@ -32,7 +38,11 @@ const ScheduleMovie = () => {
         <div className="grid grid-cols-3 gap-y-6 gap-x-6">
           {secondMovies
             ? secondMovies.map((movie, index) => (
-                <ScheduleMovieCard key={index} movie={movie} />
+                <ScheduleMovieCard
+                  key={index}
+                  movie={movie}
+                  showtime={showtime}
+                />
               ))
             : null}
         </div>
@@ -44,9 +54,10 @@ export default ScheduleMovie;
 
 type ScheduleMovieCard = {
   movie: Movie;
+  showtime: Showtime[];
 };
 
-const ScheduleMovieCard = ({ movie }: ScheduleMovieCard) => {
+const ScheduleMovieCard = ({ movie, showtime }: ScheduleMovieCard) => {
   return (
     <div className="flex p-4 rounded-md bg-gray-200 w-fit gap-4">
       <div className="">
@@ -64,18 +75,13 @@ const ScheduleMovieCard = ({ movie }: ScheduleMovieCard) => {
           </h3>
         </div>
         <div className="flex flex-col gap-2">
-          <ShowtimeButton movieId={movie.id} showtimeId="">
-            12:00
-          </ShowtimeButton>
-          <ShowtimeButton movieId={movie.id} showtimeId="">
-            15:00
-          </ShowtimeButton>
-          <ShowtimeButton movieId={movie.id} showtimeId="">
-            19:00
-          </ShowtimeButton>
-          <ShowtimeButton movieId={movie.id} showtimeId="">
-            21:00
-          </ShowtimeButton>
+          {showtime
+            ? showtime.map((showtime) => (
+                <ShowtimeButton movieId={movie.id} showtimeId={showtime.id}>
+                  {showtime.time}
+                </ShowtimeButton>
+              ))
+            : null}
         </div>
       </div>
     </div>
