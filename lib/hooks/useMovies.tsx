@@ -14,7 +14,7 @@ export default function useMovies() {
       .doc(id)
       .get()
       .then((res) => {
-        return res.data();
+        return { ...res.data(), id };
       });
     return data;
   }, []);

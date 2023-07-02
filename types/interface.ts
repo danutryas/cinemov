@@ -39,10 +39,16 @@ export type Transaction = {
 export type Showtime = {
   studio: number;
   time: string;
+  id: string;
 };
 export type MoviePlay = {
   movieId: string;
   showtimeId: string;
+  availableSeat: number;
+  Seats: {
+    seatNumber: string;
+    status: string;
+  }[];
 };
 export type Booked = {
   moviePlayId: string;
