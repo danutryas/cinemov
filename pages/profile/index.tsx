@@ -61,8 +61,8 @@ const UserProfile = () => {
       <div className="col-span-4 h-[200vh] col-start-4 flex flex-col gap-4">
         <CardBuilder title="Your Tickets">
           {ticket && ticket.length > 0
-            ? ticket.map((ticket: Ticket) => (
-                <TicketBuilder ticketCol={ticket} />
+            ? ticket.map((ticket: Ticket, index: number) => (
+                <TicketBuilder ticketCol={ticket} key={index} />
               ))
             : null}
         </CardBuilder>
