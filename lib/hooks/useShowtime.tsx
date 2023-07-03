@@ -7,6 +7,17 @@ import { defaultShowtime } from "../defaultValue";
 export default function useShowtime() {
   const [showtime, setShowtime] = useState<Showtime[]>([defaultShowtime]);
 
+  const getShowtimeById = useCallback(async (id: string) => {
+    let data = db
+      .collection("showtime")
+      .doc(id)
+      .get()
+      .then((res) => {
+        return { ...res.data(), id };
+      });
+    return data;
+  }, []);
+
   const getShowtime = useCallback(async () => {
     let data = db
       .collection("showtime")
@@ -25,5 +36,5 @@ export default function useShowtime() {
     getShowtime();
   }, []);
 
-  return { showtime };
+  return { showtime, getShowtimeById };
 }

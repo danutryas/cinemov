@@ -19,6 +19,16 @@ export default function useMoviePlay() {
       });
     return data;
   };
+  const getMoviePlayDetails = async (moviePlayId: string) => {
+    let data = db
+      .collection("movie-play")
+      .doc(moviePlayId)
+      .get()
+      .then((res) => {
+        return res.data();
+      });
+    return data;
+  };
 
-  return { getMoviePlay };
+  return { getMoviePlay, getMoviePlayDetails };
 }
