@@ -1,4 +1,11 @@
-import { Movie, MoviePlay, Showtime, UserData } from "@/types/interface";
+import {
+  Movie,
+  MoviePlay,
+  Showtime,
+  Ticket,
+  UserData,
+  TicketData,
+} from "@/types/interface";
 
 export const defaultUrl: string = "https://www.youtube.com/embed/";
 export const defaultMovie: Movie = {
@@ -33,4 +40,15 @@ export const defaultMoviePlay: MoviePlay = {
       status: "",
     },
   ],
+};
+export const defaultTicket: Ticket = {
+  id: "",
+  moviePlayId: "",
+  seatNumber: [],
+  userId: "",
+};
+export const defaultTicketData: TicketData = {
+  movie: defaultMovie,
+  showtime: defaultShowtime,
+  moviePlay: defaultMoviePlay,
 };

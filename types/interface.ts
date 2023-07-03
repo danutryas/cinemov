@@ -68,3 +68,14 @@ export interface UserData extends Balance {
   image: string;
   id: string;
 }
+export interface Ticket {
+  id: string;
+  moviePlayId: string;
+  seatNumber: number[] | [];
+  userId: string;
+}
+export interface TicketData {
+  movie: Movie;
+  showtime: Showtime;
+  moviePlay: MoviePlay;
+}
