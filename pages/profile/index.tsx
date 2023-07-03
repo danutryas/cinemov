@@ -82,8 +82,11 @@ const UserProfile = () => {
         </CardBuilder>
         <CardBuilder title="Balance History">
           {transactions && transactions.length > 0 ? (
-            transactions.map((transaction: Transaction) => (
-              <div className="bg-gray-400 rounded-md px-4 py-2 flex justify-between">
+            transactions.map((transaction: Transaction, index: number) => (
+              <div
+                className="bg-gray-400 rounded-md px-4 py-2 flex justify-between"
+                key={index}
+              >
                 <div className="">
                   <p>{transaction.type}</p>
                 </div>
