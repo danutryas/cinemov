@@ -49,10 +49,20 @@ const UserProfile = () => {
             </h4>
             <div className="flex gap-2 w-full px-4">
               <div className="basis-1/2">
-                <Button fullWidth>Withdraw</Button>
+                <Button
+                  fullWidth
+                  onClick={() => router.push("/profile/wallet/withdraw")}
+                >
+                  Withdraw
+                </Button>
               </div>
               <div className="basis-1/2">
-                <Button fullWidth>Deposit</Button>
+                <Button
+                  fullWidth
+                  onClick={() => router.push("/profile/wallet/deposit")}
+                >
+                  Deposit
+                </Button>
               </div>
             </div>
           </div>

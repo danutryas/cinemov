@@ -79,3 +79,8 @@ export interface TicketData {
   showtime: Showtime;
   moviePlay: MoviePlay;
 }
+
+export interface IScheduleMovieCard {
+  movie: Movie;
+  showtime: Showtime[];
+}

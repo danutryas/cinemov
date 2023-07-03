@@ -45,7 +45,12 @@ const TicketBuilder = ({ ticketCol }: TicketBuilderProps) => {
 
   return (
     <div className="flex flex-col gap-2 w-full bg-gray-400 h-fit rounded-md px-4 pt-2 pb-4">
-      <p className="text-xl font-bold truncate">{ticket.movie.title}</p>
+      <div className="flex justify-between items-end gap-8">
+        <p className="text-xl font-bold truncate w-9/12">
+          {ticket.movie.title}
+        </p>
+        <p className="text-md font-bold text-gray-600 text-right">E-TICKET</p>
+      </div>
       <div className=" grid grid-cols-4">
         <div className="col-span-1">
           <div className="flex flex-col gap-1">
