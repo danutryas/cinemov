@@ -1,19 +1,18 @@
 import { useEffect, useState, useCallback } from "react";
-import { Ticket, User } from "@/types/interface";
+import { Transaction, User } from "@/types/interface";
 import { db } from "../firebase/firebase.config";
-import { defaultShowtime, defaultTicket } from "../defaultValue";
+import { defaultTransaction } from "../defaultValue";
 import { useSession } from "next-auth/react";
 
 // get user data
-export default function useTicket() {
-  const [ticket, setTicket] = useState<Ticket[]>([]);
+export default function useTransaction() {
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
   const session = useSession() as any;
 
-  const getTickets = useCallback(async (user: User) => {
+  const getTransactions = useCallback(async (user: User) => {
     let data = db
-      .collection("ticket")
+      .collection("transaction")
       .where("userId", "==", user.id)
-      .limit(5)
       .get()
       .then((res) => {
         return res.docs.map((doc) => {
@@ -21,16 +20,15 @@ export default function useTicket() {
         });
       });
     data.then((res: any) => {
-      console.log(res);
-      setTicket(res);
+      setTransactions(res);
     });
   }, []);
 
   useEffect(() => {
     if (session.data) {
-      getTickets(session.data.user);
+      getTransactions(session.data.user);
     }
   }, [session]);
 
-  return { ticket };
+  return { transactions };
 }

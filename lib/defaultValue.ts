@@ -5,6 +5,7 @@ import {
   Ticket,
   UserData,
   TicketData,
+  Transaction,
 } from "@/types/interface";
 
 export const defaultUrl: string = "https://www.youtube.com/embed/";
@@ -51,4 +52,11 @@ export const defaultTicketData: TicketData = {
   movie: defaultMovie,
   showtime: defaultShowtime,
   moviePlay: defaultMoviePlay,
+};
+export const defaultTransaction: Transaction = {
+  amount: 0,
+  type: "",
+  userId: "",
+  method: "",
+  description: "",
 };

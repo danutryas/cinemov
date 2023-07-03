@@ -35,6 +35,7 @@ export type Transaction = {
   description: string;
   type: string;
   userId: string;
+  method: string;
 };
 export type Showtime = {
   studio: number;
