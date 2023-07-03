@@ -1,16 +1,15 @@
 import { useEffect, useState, useCallback } from "react";
-import { useSession } from "next-auth/react";
-import { Movie } from "@/types/interface";
+import { Movie, Showtime } from "@/types/interface";
 import { db } from "../firebase/firebase.config";
-import { defaultMovie } from "../defaultValue";
+import { defaultShowtime } from "../defaultValue";
 
 // get user data
-export default function useMovies() {
-  const [movies, setMovies] = useState<Movie[]>([defaultMovie]);
+export default function useShowtime() {
+  const [showtime, setShowtime] = useState<Showtime[]>([defaultShowtime]);
 
-  const getMovieById = useCallback(async (id: string) => {
+  const getShowtimeById = useCallback(async (id: string) => {
     let data = db
-      .collection("movies")
+      .collection("showtime")
       .doc(id)
       .get()
       .then((res) => {
@@ -19,9 +18,9 @@ export default function useMovies() {
     return data;
   }, []);
 
-  const getMovies = useCallback(async () => {
+  const getShowtime = useCallback(async () => {
     let data = db
-      .collection("movies")
+      .collection("showtime")
       .get()
       .then((res) => {
         return res.docs.map((doc) => {
@@ -29,13 +28,13 @@ export default function useMovies() {
         });
       });
     data.then((res: any) => {
-      setMovies(res);
+      setShowtime(res);
     });
   }, []);
 
   useEffect(() => {
-    getMovies();
+    getShowtime();
   }, []);
 
-  return { movies, getMovieById };
+  return { showtime, getShowtimeById };
 }

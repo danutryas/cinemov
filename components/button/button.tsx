@@ -58,7 +58,6 @@ const Button = ({
       className={twMerge(
         typeClassName() + " " + className + " " + widthClassName()
       )}
-      // className={  `${getClassName()} ${fullWidth ? "w-full rounded-md" : ""}`}
     >
       {Children.map(children, (child) => {
         return child;

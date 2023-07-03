@@ -16,7 +16,11 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        logo: ["'Pattaya'", "sans-serif"],
+      },
       colors: {
+        logo: "#83578F",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

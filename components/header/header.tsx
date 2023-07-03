@@ -23,7 +23,7 @@ interface ProfileSection {
 
 const ProfileSection = ({ isOpen, user }: ProfileSection) => {
   const [confirmLogoutModal, setConfirmLogoutModal] = useState(false);
-
+  const router = useRouter();
   return (
     <>
       <section
@@ -33,16 +33,23 @@ const ProfileSection = ({ isOpen, user }: ProfileSection) => {
         style={{ minWidth: "25rem" }}
       >
         <section className="flex gap-2 items-center">
-          <Avatar imgSrc={null} />
+          <div
+            className="cursor-pointer"
+            onClick={() => router.push("/profile")}
+          >
+            <Avatar imgSrc={null} />
+          </div>
           <div className="">
             <p
-              className="self-center font-semibold text-gery-700 "
-              // className="self-center font-semibold text-blue-700 cursor-pointer hover:underline hover:underline-offset-2 hover:text-blue-500"
-              // onClick={() => router.push("/profile")}
+              className="self-center font-semibold text-gray-700 cursor-pointer hover:text-gray-900"
+              onClick={() => router.push("/profile")}
             >
               {user ? user.name : "user.name"}
             </p>
-            <p className="self-center font-medium text-sm text-gray-400">
+            <p
+              className="self-center font-medium text-sm text-gray-400 cursor-pointer hover:text-gray-600"
+              onClick={() => router.push("/profile")}
+            >
               {user ? user.email : "user.email"}
             </p>
           </div>
