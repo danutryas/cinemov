@@ -18,7 +18,7 @@ const ScheduleMovie = () => {
             TODAY
           </h2>
         </div>
-        <div className="grid grid-cols-3 gap-y-6 gap-x-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-6 ">
           {firstMovies
             ? firstMovies.map((movie, index) => (
                 <ScheduleMovieCard
@@ -36,7 +36,7 @@ const ScheduleMovie = () => {
             TOMORROW
           </h2>
         </div>
-        <div className="grid grid-cols-3 gap-y-6 gap-x-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-6">
           {secondMovies
             ? secondMovies.map((movie, index) => (
                 <ScheduleMovieCard

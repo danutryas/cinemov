@@ -11,9 +11,10 @@ const ScheduleMovieCard = ({ movie, showtime }: IScheduleMovieCard) => {
           height={250}
           width={166}
           alt={`${movie.title} poster`}
+          className="rounded-sm"
         />
       </div>
-      <div className="flex flex-col px-2 gap-4 justify-between ">
+      <div className="flex flex-col pr-2 pl-1 gap-4 justify-between ">
         <div className="relative">
           <h3 className="text-md font-semibold text-center py-1 after:h-[2px] after:rounded after:absolute after:w-1/2 after:bg-black after:bottom-0 after:left-1/2 after:-translate-x-1/2">
             Showtime
