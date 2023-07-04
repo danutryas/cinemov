@@ -1,4 +1,5 @@
 import Button from "@/components/button/button";
+import ShowtimeButton from "@/components/button/showtimeButton";
 import { defaultMovie, defaultMoviePlay } from "@/lib/defaultValue";
 import useMoviePlay from "@/lib/hooks/useMoviePlay";
 import useMovies from "@/lib/hooks/useMovies";
@@ -6,7 +7,7 @@ import useShowtime from "@/lib/hooks/useShowtime";
 import { Movie, MoviePlay, Showtime } from "@/types/interface";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { set } from "react-hook-form";
 
 const DetailMovie = () => {
@@ -16,9 +17,10 @@ const DetailMovie = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { showtime } = useShowtime();
   const [showtimeId, setShowtimeId] = useState<string>("");
-  const [totalSeat, setTotalSeat] = useState<number | null>(0);
+  const [totalSeat, setTotalSeat] = useState<number>(0);
   const { getMoviePlay } = useMoviePlay();
   const [moviePlay, setMoviePlay] = useState<MoviePlay>(defaultMoviePlay);
+  const inputSeatRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -65,8 +67,8 @@ const DetailMovie = () => {
   };
 
   return (
-    <div className="grid grid-cols-12 relative mt-16 h-screen gap-5">
-      <div className="col-span-5 justify-end flex  bottom-0 left-0 right-0">
+    <div className="grid grid-cols-12 relative mt-16 h-screen gap-3 px-8">
+      <div className="col-span-12 md:col-span-5 justify-center md:justify-end flex bottom-0 left-0 right-0 ">
         <div className="h-[500px] w-[320px] py-6 px-4 bg-gray-200 rounded-lg sticky top-2 justify-center flex flex-col gap-3">
           <Image
             src={movie ? movie.poster_url : "/blank.jpg"}
@@ -80,20 +82,28 @@ const DetailMovie = () => {
           </h1>
         </div>
       </div>
-      <div className="col-span-5 h-[200vh] col-start-6 flex flex-col gap-4">
+      <div className="col-span-12 md:col-span-7 md:col-start-6  h-auto flex flex-col gap-4 mb-10">
         <CardBuilder title="Movie Details"></CardBuilder>
         <CardBuilder title="Get Ticket">
-          <div className="flex justify-center gap-4">
+          <div className="grid grid-cols-2 md:flex justify-center items-center gap-4 text-center">
             {showtime
               ? showtime.map((item: Showtime) => (
-                  <div
-                    className={`bg-gray-300 px-3 py-1 rounded-md cursor-pointer ${
-                      showtimeId === item.id ? "bg-green-500" : ""
-                    }`}
-                    key={item.id}
-                    onClick={() => addQueryParams("time", item.id)}
-                  >
-                    {item.time}
+                  <div className="w-ful justify-center flex" key={item.id}>
+                    <div className="w-fit">
+                      {/* <p
+                        className={`bg-gray-300 px-3 py-1 rounded-md cursor-pointer ${
+                          showtimeId === item.id ? "bg-green-500" : ""
+                        }`}
+                      >
+                        {item.time}
+                      </p> */}
+                      <ShowtimeButton
+                        onClick={() => addQueryParams("time", item.id)}
+                        isActived={showtimeId === item.id}
+                      >
+                        {item.time}
+                      </ShowtimeButton>
+                    </div>
                   </div>
                 ))
               : null}
@@ -102,39 +112,54 @@ const DetailMovie = () => {
         {router.query.time ? (
           <>
             <CardBuilder title="How many seat to booked">
-              <div className="flex justify-center gap-4">
+              <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <input
+                  ref={inputSeatRef}
                   name="seat"
                   type="number"
                   placeholder="0"
-                  className="w-20"
+                  className="w-full sm:w-72 py-1 px-3 rounded-sm"
                   required
                 />
+                <Button
+                  onClick={() =>
+                    setTotalSeat(Number(inputSeatRef.current?.value))
+                  }
+                >
+                  Next
+                </Button>
               </div>
             </CardBuilder>
             <CardBuilder title="Choose the seat">
-              <div className="grid grid-cols-8 w-full gap-y-4 justify-items-center ">
-                {moviePlay
-                  ? moviePlay.Seats.map((mp, index: number) => (
-                      <div
-                        key={index}
-                        className={`bg-gray-300 w-11 h-11 flex justify-center items-center rounded-md self-center ${seatColor(
-                          mp.status
-                        )}`}
-                        onClick={() => console.log(mp.status)}
-                      >
-                        <p className="text-lg font-semibold">{mp.seatNumber}</p>
-                      </div>
-                    ))
-                  : null}
-              </div>
-              <div className="bg-gray-300 h-11 flex justify-center items-center rounded-md w-full">
-                <p className="text-lg font-semibold">Screen</p>
-              </div>
-              {/* {totalSeat !== null ? (
-              ) : null} */}
+              {totalSeat > 0 ? (
+                <>{/* activate click */}</>
+              ) : (
+                // just show
+                <>
+                  <div className="grid grid-cols-8 w-full gap-y-4 justify-items-center ">
+                    {moviePlay
+                      ? moviePlay.Seats.map((mp, index: number) => (
+                          <div
+                            key={index}
+                            className={`bg-gray-300 w-6 h-6 sm:h-11 sm:w-11 flex justify-center items-center rounded-md self-center ${seatColor(
+                              mp.status
+                            )}`}
+                            onClick={() => console.log(mp.status)}
+                          >
+                            <p className="text-sm sm:text-lg font-medium sm:font-semibold">
+                              {mp.seatNumber}
+                            </p>
+                          </div>
+                        ))
+                      : null}
+                  </div>
+                  <div className="bg-gray-300 h-11 flex justify-center items-center rounded-md w-full">
+                    <p className="text-lg font-semibold">Screen</p>
+                  </div>
+                </>
+              )}
             </CardBuilder>
-            <Button>Book Now</Button>
+            <Button className="mt-2">Book Now</Button>
           </>
         ) : null}
       </div>
