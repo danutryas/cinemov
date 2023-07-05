@@ -5,12 +5,15 @@ import {
   defaultMovie,
   defaultMoviePlay,
   defaultShowtime,
+  defaultTicket,
 } from "@/lib/defaultValue";
 import { useModal } from "@/lib/hooks/useModal";
 import useMoviePlay from "@/lib/hooks/useMoviePlay";
 import useMovies from "@/lib/hooks/useMovies";
 import useShowtime from "@/lib/hooks/useShowtime";
-import { Movie, MoviePlay, Showtime } from "@/types/interface";
+import useTicket from "@/lib/hooks/useTicket";
+import useUser from "@/lib/hooks/useUser";
+import { Movie, MoviePlay, Showtime, Ticket } from "@/types/interface";
 import { Modal } from "flowbite-react";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -21,6 +24,8 @@ const DetailMovie = () => {
   const { getMovieById } = useMovies();
   const { getMoviePlay } = useMoviePlay();
   const { showtime, getShowtimeById } = useShowtime();
+  const { sendTicket } = useTicket();
+  const { user } = useUser();
 
   const inputSeatRef = useRef<HTMLInputElement>(null);
 
@@ -32,6 +37,7 @@ const DetailMovie = () => {
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
   const [seatNumbers, setSeatNumbers] = useState<number[]>([1, 2, 3]);
   const [activeShowtime, setActiveShowtime] = useState<Showtime | null>(null);
+  const [ticket, setTicket] = useState<Ticket>(defaultTicket);
 
   useEffect(() => {
     setIsLoading(true);
@@ -83,10 +89,27 @@ const DetailMovie = () => {
     }
   };
 
+  const onSubmit = () => {
+    moviePlay.Seats = moviePlay.Seats.map((seat) => {
+      if (seatNumbers.toString().includes(seat.seatNumber)) {
+        seat.status = "Booked";
+      }
+      return seat;
+    });
+    sendTicket(
+      {
+        moviePlayId: moviePlay.id,
+        userId: user.id,
+        seatNumber: seatNumbers,
+      },
+      moviePlay
+    );
+  };
+
   return (
     <>
       <div className="grid grid-cols-12 relative mt-16 h-screen gap-3 px-8">
-        <div className="col-span-12 md:col-span-5 justify-center md:justify-end flex bottom-0 left-0 right-0 ">
+        <div className="col-span-12 md:col-span-4 justify-center md:justify-end flex bottom-0 left-0 right-0 ">
           <div className="h-fit w-[320px] p-4 bg-gray-200 rounded-lg sticky top-2 justify-center flex flex-col gap-3">
             <Image
               src={movie ? movie.poster_url : "/blank.jpg"}
@@ -100,17 +123,18 @@ const DetailMovie = () => {
             </h1>
           </div>
         </div>
-        <div className="col-span-12 md:col-span-7 md:col-start-6  h-auto flex flex-col gap-4 mb-10">
+        <div className="col-span-12 md:col-span-7 md:col-start-5  h-auto flex flex-col gap-4 mb-10">
           <CardBuilder title="Movie Details"></CardBuilder>
           <CardBuilder title="Get Ticket">
-            <div className="grid grid-cols-2 md:flex justify-center items-center gap-4 text-center">
+            <div className="grid grid-cols-2 md:flex justify-center items-center gap-2 text-center">
               {showtime
                 ? showtime.map((item: Showtime) => (
-                    <div className="w-ful justify-center flex" key={item.id}>
+                    <div className="w-full justify-center flex " key={item.id}>
                       <div className="w-fit">
                         <ShowtimeButton
                           onClick={() => addQueryParams("time", item.id, item)}
                           isActived={showtimeId === item.id}
+                          className="px-[30px]"
                         >
                           {item.time}
                         </ShowtimeButton>
@@ -200,7 +224,7 @@ const DetailMovie = () => {
       <PaymentModal
         setShowModal={setIsModalActive}
         showModal={isModalActive}
-        onSubmit={() => {}}
+        onSubmit={onSubmit}
         movie={movie}
         showtime={activeShowtime}
         seatNumbers={seatNumbers}

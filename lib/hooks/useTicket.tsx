@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { Ticket, User } from "@/types/interface";
+import { MoviePlay, Ticket, User } from "@/types/interface";
 import { db } from "../firebase/firebase.config";
 import { defaultShowtime, defaultTicket } from "../defaultValue";
 import { useSession } from "next-auth/react";
@@ -21,10 +21,19 @@ export default function useTicket() {
         });
       });
     data.then((res: any) => {
-      console.log(res);
+      // console.log(res);
       setTicket(res);
     });
   }, []);
+  const sendTicket = useCallback(
+    async (ticket: Ticket, moviePlay: MoviePlay) => {
+      db.collection("ticket").add(ticket);
+      db.collection("movie-play").doc(moviePlay.id).update({
+        Seats: moviePlay.Seats,
+      });
+    },
+    []
+  );
 
   useEffect(() => {
     if (session.data) {
@@ -32,5 +41,5 @@ export default function useTicket() {
     }
   }, [session]);
 
-  return { ticket };
+  return { ticket, sendTicket };
 }

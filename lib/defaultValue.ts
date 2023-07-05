@@ -32,6 +32,7 @@ export const defaultShowtime: Showtime = {
   id: "",
 };
 export const defaultMoviePlay: MoviePlay = {
+  id: "",
   movieId: "",
   showtimeId: "",
   availableSeat: 0,

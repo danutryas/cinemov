@@ -34,7 +34,7 @@ const DepositPage = () => {
         <div className="flex flex-col gap-4">
           <h1 className="text-2xl font-semibold">Create a new Deposit</h1>
           <CardBuilder title="Account">
-            <div className="grid grid-cols-6">
+            <div className="grid grid-cols-6 gap-2">
               <div className="col-span-1">
                 <div className="flex flex-col gap-2">
                   <h5>Name</h5>
@@ -43,7 +43,7 @@ const DepositPage = () => {
               </div>
               <div className="col-span-2">
                 <div className="flex flex-col gap-2 font-medium">
-                  <p>: {user.name}</p>
+                  <p className="truncate">: {user.name}</p>
                   <p>
                     :{" "}
                     {Intl.NumberFormat("id-ID", {
@@ -61,7 +61,7 @@ const DepositPage = () => {
               </div>
               <div className="col-span-2">
                 <div className="flex flex-col gap-2 font-medium">
-                  <p>: {user.email}</p>
+                  <p className="truncate">: {user.email}</p>
                 </div>
               </div>
             </div>

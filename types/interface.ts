@@ -43,6 +43,7 @@ export type Showtime = {
   id: string;
 };
 export type MoviePlay = {
+  id: string;
   movieId: string;
   showtimeId: string;
   availableSeat: number;
@@ -70,7 +71,7 @@ export interface UserData extends Balance {
   id: string;
 }
 export interface Ticket {
-  id: string;
+  id?: string;
   moviePlayId: string;
   seatNumber: number[] | [];
   userId: string;

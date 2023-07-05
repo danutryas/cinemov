@@ -2,7 +2,7 @@ import Button from "@/components/button/button";
 import useUser from "@/lib/hooks/useUser";
 import { useState } from "react";
 
-const DepositPage = () => {
+const WithdrawPage = () => {
   const { user } = useUser();
 
   const [amount, setAmount] = useState<number | null>(null);
@@ -120,7 +120,7 @@ const DepositPage = () => {
     </div>
   );
 };
-export default DepositPage;
+export default WithdrawPage;
 
 const CardBuilder = ({ children, title }: any) => {
   return (
