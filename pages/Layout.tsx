@@ -28,7 +28,6 @@ export default function Layout({ children }: React.PropsWithChildren<{}>) {
         }`}
         onClick={setInActiveModal}
       ></div>
-      {/* </div> */}
     </>
   );
 }

@@ -17,6 +17,7 @@ interface ButtonProps {
   children: ReactNode;
   className?: string;
   fullWidth?: boolean;
+  disabled?: boolean;
 }
 
 const Button = ({
@@ -25,6 +26,7 @@ const Button = ({
   onClick,
   className,
   fullWidth = false,
+  disabled = false,
 }: ButtonProps) => {
   const typeClassName = () => {
     switch (type) {
@@ -55,6 +57,7 @@ const Button = ({
           onClick();
         }
       }}
+      disabled={disabled}
       className={twMerge(
         typeClassName() + " " + className + " " + widthClassName()
       )}
