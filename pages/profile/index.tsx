@@ -1,5 +1,6 @@
 import Button from "@/components/button/button";
 import TicketBuilder from "@/components/card/ticketBuilder";
+import formatCurrency from "@/components/format/userBalance";
 
 import useTicket from "@/lib/hooks/useTicket";
 import useTransaction from "@/lib/hooks/useTransactions";
@@ -13,7 +14,7 @@ const UserProfile = () => {
   const router = useRouter();
   const { user } = useUser();
   const { ticket } = useTicket();
-  const { transactions } = useTransaction();
+  const { transactions, getTransactionsById } = useTransaction();
   return (
     <div className="grid grid-cols-8 relative mt-16 h-screen gap-5">
       <div className="col-span-2 col-start-2 justify-end flex bottom-0 left-0 right-0">
@@ -26,28 +27,18 @@ const UserProfile = () => {
               height={150}
               width={150}
             />
-            <div className="flex flex-col gap-1 items-center">
-              <h1>
-                <span className="text-2xl font-semibold">
-                  {user ? user.name : "Your Name"}
-                </span>
+            <div className="flex flex-col gap-1 w-full h-fit">
+              <h1 className="text-xl font-bold w-full text-center">
+                {user ? user.name : "Your Name"}
               </h1>
-              <h3>
-                <span className="text-xl font-semibold">
-                  {user ? user.email : "Your Email"}
-                </span>
+              <h3 className="text-lg font-semibold w-full text-center break-all text-gray-600">
+                {user ? user.email : "Your Email"}
               </h3>
             </div>
           </div>
           <div className="w-full p-4 bg-gray-200 rounded-lg items-center flex flex-col gap-3">
             <h4 className="text-xl font-semibold">
-              {user?.amount
-                ? Intl.NumberFormat("id-ID", {
-                    style: "currency",
-                    currency: "IDR",
-                    minimumFractionDigits: 0,
-                  }).format(user.amount)
-                : "Rp 0"}
+              {formatCurrency(user?.amount)}
             </h4>
             <div className="flex gap-2 w-full px-4">
               <div className="basis-1/2">
@@ -73,9 +64,18 @@ const UserProfile = () => {
       <div className="col-span-4 h-[200vh] col-start-4 flex flex-col gap-4">
         <CardBuilder title="Your Tickets">
           {ticket && ticket.length > 0 ? (
-            ticket.map((ticket: Ticket, index: number) => (
-              <TicketBuilder ticketCol={ticket} key={index} />
-            ))
+            ticket.map((ticket: Ticket, index: number) => {
+              const transaction = transactions?.find(
+                (transaction) => transaction.id === ticket.transactionId
+              );
+              return (
+                <TicketBuilder
+                  ticketCol={ticket}
+                  key={index}
+                  transaction={transaction}
+                />
+              );
+            })
           ) : (
             <EmptyState link="/schedule" linkName="Get Ticket" title="Ticket" />
           )}

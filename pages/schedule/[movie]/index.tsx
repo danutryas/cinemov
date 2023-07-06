@@ -101,8 +101,18 @@ const DetailMovie = () => {
         moviePlayId: moviePlay.id,
         userId: user.id,
         seatNumber: seatNumbers,
+        transactionId: "",
       },
-      moviePlay
+      moviePlay,
+      {
+        amount: movie.ticket_price,
+        description: "Buy Ticket",
+        method: "",
+        phoneNumber: "",
+        status: "pending",
+        type: "withdraw",
+        userId: user.id,
+      }
     );
   };
 

@@ -1,4 +1,5 @@
 import Button from "@/components/button/button";
+import formatCurrency from "@/components/format/userBalance";
 import useUser from "@/lib/hooks/useUser";
 import { useState } from "react";
 
@@ -43,15 +44,8 @@ const WithdrawPage = () => {
               </div>
               <div className="col-span-2">
                 <div className="flex flex-col gap-2 font-medium">
-                  <p>: {user.name}</p>
-                  <p>
-                    :{" "}
-                    {Intl.NumberFormat("id-ID", {
-                      style: "currency",
-                      currency: "IDR",
-                      minimumFractionDigits: 0,
-                    }).format(user.amount)}
-                  </p>
+                  <p className="truncate">: {user.name}</p>
+                  <p>: {formatCurrency(user?.amount)}</p>
                 </div>
               </div>
               <div className="col-span-1">
@@ -61,7 +55,7 @@ const WithdrawPage = () => {
               </div>
               <div className="col-span-2">
                 <div className="flex flex-col gap-2 font-medium">
-                  <p>: {user.email}</p>
+                  <p className="truncate">: {user.email}</p>
                 </div>
               </div>
             </div>

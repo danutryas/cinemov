@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { MoviePlay, Ticket, User } from "@/types/interface";
+import { MoviePlay, Ticket, Transaction, User } from "@/types/interface";
 import { db } from "../firebase/firebase.config";
 import { defaultShowtime, defaultTicket } from "../defaultValue";
 import { useSession } from "next-auth/react";
@@ -13,7 +13,7 @@ export default function useTicket() {
     let data = db
       .collection("ticket")
       .where("userId", "==", user.id)
-      .limit(5)
+      .limit(10)
       .get()
       .then((res) => {
         return res.docs.map((doc) => {
@@ -21,19 +21,27 @@ export default function useTicket() {
         });
       });
     data.then((res: any) => {
-      // console.log(res);
       setTicket(res);
     });
   }, []);
   const sendTicket = useCallback(
-    async (ticket: Ticket, moviePlay: MoviePlay) => {
-      db.collection("ticket").add(ticket);
-      db.collection("movie-play").doc(moviePlay.id).update({
+    async (ticket: Ticket, moviePlay: MoviePlay, transaction: Transaction) => {
+      await db
+        .collection("transaction")
+        .add(transaction)
+        .then((res) => {
+          db.collection("ticket").add({ ...ticket, transactionId: res.id });
+        });
+
+      await db.collection("movie-play").doc(moviePlay.id).update({
         Seats: moviePlay.Seats,
       });
     },
     []
   );
+  const deleteTicket = useCallback(async (ticketId: string) => {
+    await db.collection("ticket").doc(ticketId).delete();
+  }, []);
 
   useEffect(() => {
     if (session.data) {
@@ -41,5 +49,5 @@ export default function useTicket() {
     }
   }, [session]);
 
-  return { ticket, sendTicket };
+  return { ticket, sendTicket, deleteTicket };
 }

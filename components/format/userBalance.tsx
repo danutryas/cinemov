@@ -1,6 +1,6 @@
 import useUser from "@/lib/hooks/useUser";
 
-const formatCurrency = (amount: number) => {
+const formatCurrency = (amount: number | null | undefined) => {
   return amount
     ? Intl.NumberFormat("id-ID", {
         style: "currency",

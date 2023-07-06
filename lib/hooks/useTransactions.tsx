@@ -23,6 +23,21 @@ export default function useTransaction() {
       setTransactions(res);
     });
   }, []);
+  const getTransactionsById = useCallback(async (transactionId: string) => {
+    let data = db
+      .collection("transaction")
+      .doc(transactionId)
+      .get()
+      .then((res) => {
+        return { ...res.data(), id: res.id };
+      });
+    data.then((res: any) => {
+      setTransactions(res);
+    });
+  }, []);
+  const updateTransaction = useCallback(async (transaction: Transaction) => {
+    db.collection("transaction").doc(transaction.id).update(transaction);
+  }, []);
 
   useEffect(() => {
     if (session.data) {
@@ -30,5 +45,5 @@ export default function useTransaction() {
     }
   }, [session]);
 
-  return { transactions };
+  return { transactions, getTransactionsById, updateTransaction };
 }
