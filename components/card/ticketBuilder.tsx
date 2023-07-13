@@ -18,7 +18,7 @@ type TicketBuilderProps = {
 };
 
 const TicketBuilder = ({ ticketCol, transaction }: TicketBuilderProps) => {
-  const { getMoviePlayDetails } = useMoviePlay();
+  const { getMoviePlayDetails, updateMoviePlay } = useMoviePlay();
   const { getMovieById } = useMovies();
   const { getShowtimeById } = useShowtime();
   const { updateTransaction } = useTransaction();
@@ -46,21 +46,36 @@ const TicketBuilder = ({ ticketCol, transaction }: TicketBuilderProps) => {
   };
 
   const onConfirmTicket = () => {
-    updateTransaction({
-      ...transaction,
-      status: "success",
-    });
-    updateBalance(
-      transaction?.userId as string,
-      user.amount - (transaction?.amount as number)
-    );
+    // ticket.moviePlay.Seats = ticket.moviePlay.Seats.map((seat) => {
+    //   if (ticketCol.seatNumber.toString().includes(seat.seatNumber)) {
+    //     seat.status = "Filled";
+    //   }
+    //   return seat;
+    // });
+    console.log(ticket.moviePlay.Seats);
+    // updateTransaction({
+    //   ...transaction,
+    //   status: "success",
+    // });
+    // updateBalance(
+    //   transaction?.userId as string,
+    //   user.amount - (transaction?.amount as number)
+    // );
+    // updateMoviePlay(ticketCol.moviePlayId, ticket.moviePlay);
   };
   const onCancelTicket = () => {
+    ticket.moviePlay.Seats = ticket.moviePlay.Seats.map((seat) => {
+      if (ticketCol.seatNumber.toString().includes(seat.seatNumber)) {
+        seat.status = "Available";
+      }
+      return seat;
+    });
     updateTransaction({
       ...transaction,
       status: "canceled",
     });
     deleteTicket(ticketCol.id as string);
+    updateMoviePlay(ticketCol.moviePlayId, ticket.moviePlay);
   };
 
   useEffect(() => {

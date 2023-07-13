@@ -48,6 +48,7 @@ export const defaultTicket: Ticket = {
   moviePlayId: "",
   seatNumber: [],
   userId: "",
+  transactionId: "",
 };
 export const defaultTicketData: TicketData = {
   movie: defaultMovie,
