@@ -29,6 +29,10 @@ export default function useMoviePlay() {
       });
     return data;
   };
-
-  return { getMoviePlay, getMoviePlayDetails };
+  const updateMoviePlay = async (moviePlayId: string, moviePlay: any) => {
+    await db.collection("movie-play").doc(moviePlayId).update({
+      Seats: moviePlay.Seats,
+    });
+  };
+  return { getMoviePlay, getMoviePlayDetails, updateMoviePlay };
 }

@@ -6,9 +6,8 @@ type DeleteLogModal = {
   showModal: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   onSubmit: () => void;
-  msg?: string;
 };
-const ConfirmDelete = (props: DeleteLogModal) => {
+const ConfirmSave = (props: DeleteLogModal) => {
   return (
     <Modal
       size="md"
@@ -19,15 +18,10 @@ const ConfirmDelete = (props: DeleteLogModal) => {
       <Modal.Header></Modal.Header>
       <Modal.Body>
         <div className="text-center">
-          <ExclamationCircleIcon className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
           <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-            Are you sure you want to{" "}
-            <span className="font-bold">{props.msg}</span>?
+            Are you sure you want to save it?
           </h3>
           <div className="flex justify-center gap-4">
-            <Button type="red" onClick={props.onSubmit}>
-              Yes, Im sure
-            </Button>
             <Button
               type="alternative"
               onClick={() => {
@@ -36,10 +30,11 @@ const ConfirmDelete = (props: DeleteLogModal) => {
             >
               Cancel
             </Button>
+            <Button onClick={props.onSubmit}>Yes, Im sure</Button>
           </div>
         </div>
       </Modal.Body>
     </Modal>
   );
 };
-export default ConfirmDelete;
+export default ConfirmSave;

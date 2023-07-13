@@ -31,11 +31,14 @@ export type Account = {
 };
 // export type User = {};
 export type Transaction = {
-  amount: number;
-  description: string;
-  type: string;
-  userId: string;
-  method: string;
+  id?: string;
+  amount?: number;
+  description?: string;
+  method?: string;
+  status?: string;
+  phoneNumber?: string;
+  type?: string;
+  userId?: string;
 };
 export type Showtime = {
   studio: number;
@@ -43,6 +46,7 @@ export type Showtime = {
   id: string;
 };
 export type MoviePlay = {
+  id: string;
   movieId: string;
   showtimeId: string;
   availableSeat: number;
@@ -70,10 +74,11 @@ export interface UserData extends Balance {
   id: string;
 }
 export interface Ticket {
-  id: string;
+  id?: string;
   moviePlayId: string;
   seatNumber: number[] | [];
   userId: string;
+  transactionId: string;
 }
 export interface TicketData {
   movie: Movie;

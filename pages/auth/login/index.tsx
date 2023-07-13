@@ -25,7 +25,7 @@ const SignInProvider = ({
   };
   return (
     <button
-      className="w-full rounded-md  flex h-10 justify-center items-center p-0 hover:bg-gray-100 hover:border-gray-300"
+      className="w-full rounded-md  flex h-10 justify-center items-center p-0 hover:bg-gray-100 hover:border-gray-300 gap-2"
       onClick={(e: any) => onSignIn(e)}
     >
       {children}
@@ -64,19 +64,20 @@ const LoginPage = () => {
             Enter your details below.
           </p>
         </div>
-        <div className="w-full flex gap-3">
-          <SignInProvider provider="google">
-            <FcGoogle size={18} />
-          </SignInProvider>
+        {/* <div className="w-full flex gap-3">
           <SignInProvider>a</SignInProvider>
           <SignInProvider>a</SignInProvider>
           <SignInProvider>a</SignInProvider>
         </div>
         <div className="w-full h-10 justify-center flex relative items-center my-3">
           <p className="text-[#637381] z-1 ">OR</p>
-        </div>
+        </div> */}
         <form onSubmit={handleSubmit} className="w-full flex flex-col gap-6">
-          <TextField
+          <SignInProvider provider="google">
+            <FcGoogle size={18} />
+            <p className="font-semibold text-md -mt-1">Login With Google</p>
+          </SignInProvider>
+          {/* <TextField
             required
             fullWidth
             id="email"
@@ -115,7 +116,7 @@ const LoginPage = () => {
             >
               Sign up now
             </Link>
-          </div>
+          </div> */}
         </form>
       </div>
     </div>

@@ -8,6 +8,7 @@ import { ExitIcon } from "@/lib/assets/icons";
 import { signOut, useSession } from "next-auth/react";
 import ConfirmDelete from "../modal/confirmDelete";
 import useUser from "@/lib/hooks/useUser";
+import formatCurrency from "../format/userBalance";
 
 interface ProfileSection {
   isOpen: boolean;
@@ -57,13 +58,7 @@ const ProfileSection = ({ isOpen, user }: ProfileSection) => {
         <hr className="my-3" />
         <section className="flex justify-between items-center">
           <p className="font-medium text-gray-700">
-            {user?.amount
-              ? Intl.NumberFormat("id-ID", {
-                  style: "currency",
-                  currency: "IDR",
-                  minimumFractionDigits: 0,
-                }).format(user.amount)
-              : "Rp0"}
+            {formatCurrency(user?.amount)}
           </p>
           <Button>Deposit</Button>
         </section>
@@ -80,6 +75,7 @@ const ProfileSection = ({ isOpen, user }: ProfileSection) => {
         showModal={confirmLogoutModal}
         setShowModal={setConfirmLogoutModal}
         onSubmit={signOut}
+        msg="Sign Out"
       />
     </>
   );
