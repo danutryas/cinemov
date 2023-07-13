@@ -1,20 +1,10 @@
-# cinemov
-
-🎉 Congratulations, your project was successfully generated with [Create Next Stack](https://www.create-next-stack.com/)!
+# Cinemov
 
 To get started, run:
 
 ```bash
 npm run dev
 ```
-
-## Final Steps
-
-There are a few final steps that we were not able to perform automatically. We have provided a complete list for you below. You should take care of these before you can start developing your project. You can delete each item from the list as you go along.
-
-### To do:
-
-- Integrate Vercel with your repository host for continuous deployments at https://vercel.com/new
 
 ## Scripts
 
@@ -53,3 +43,40 @@ The table below gives an overview of the technologies used in this project, as w
 | npm             | [Website](https://www.npmjs.com/) - [Docs](https://docs.npmjs.com/) - [GitHub](https://github.com/npm/cli)                                                                                                      |
 | GitHub Actions  | [Website](https://github.com/features/actions) - [Docs](https://docs.github.com/en/actions) - [Workflow syntax](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions)                |
 | Vercel          | [Website](https://vercel.com/) - [Docs](https://vercel.com/docs) - [CLI Docs](https://vercel.com/docs/cli)                                                                                                      |
+
+<details>
+  <summary>Env Settings</summary>
+  
+```js
+NEXT_PUBLIC_GITHUB_SECRET=6bb2835187cf3b57352ea2f059d13d2baf373887
+NEXT_PUBLIC_GITHUB_ID=809edc894551fa11465e
+
+NEXT_PUBLIC_GOOGLE_SECRET=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
+NEXT_PUBLIC_GOOGLE_ID=570762733570-840o0em9ll3q1jnk7mag4got3g3jaspg.apps.googleusercontent.com
+GOOGLE_APPLICATION_CREDENTIALS="./cinemov-compfest-firebase-adminsdk.json"
+
+NEXT_PUBLIC_FIREBASE_APP_ID=1:570762733570:web:a01eceb9fbfee5b96cdf1b
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=570762733570
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=cinemov-compfest.appspot.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=cinemov-compfest
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=cinemov-compfest.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyCkSNdFjH5AnnX7QHbJYPDqJOULqyVNU-A
+
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=Jdnj6llhy8mlXrlhzZ+mP7vS+IMwRSVCBG0Hzz3EnyM=
+
+FIREBASE_ADMIN_CONFIG_type=service_account
+FIREBASE_ADMIN_CONFIG_project_id=cinemov-compfest
+FIREBASE_ADMIN_CONFIG_private_key_id=e007dffaa055cd1bf19691d4bc5e444dde269c95
+FIREBASE_ADMIN_CONFIG_private_key=-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDLWtKnjlsHf3nv\nfXN8+AHaoTb2OX8RiQR4Vd1qZCCqSdksV8S6AFvW3zhcKSu5LmKfK8tCltlEBnVk\nRB9Q7TIhDcUQNpl0mdZtel56ehu1wg4SUH0sihyaHCuyRziZ0RUGRsiWh+K3wU0b\nJl+hhqggThJlsh59vhfZ+tRd/66L5ai89gAi6QfdDHr7Q0BhIAsD8vwxGMt1CSZr\nYOrsiqu0NWBkzspyj5I8Vsk9Hufjp2C3wrbtTNSJOrDC+/FvVhL0nbytC85sePt6\nCTqdEWUjzKRvEQynqtDjy2jsNyKIPpIcxZ0nKZc/f5IqMuBhAvwmAd3iyRHTKqCA\nfUns8My5AgMBAAECggEAAUOcBPqN4mEVYG0irZ066pPT55oA01FmsWQXicy8Coiq\noTAvxTODlX6JhOckwh2Kzub+QTh2w+5PWNybZ18hhncBIGtaeBENLQFm+uCR8XSf\nwI4JLSnPVscxseoxEViR6yNR3NH5fyP/pz3yAOHwOorlIL01ZPURFqz6dAy0qIcs\nkRWeAoOw7C47Ae16uoFR5p/R99VHHGULVFCmd6WPYrkwzg5oHVf2mowqc3Yo9Tjb\nHLy3/F9Nes1QiasqxIDUP17o3BDeRnTlf2vCJ4y1JgIyiynXkOJjLBhW7HPDGlAm\n6V64qGuP4DQdwU9PlTYH+tW6dN1uAKLFpj54r+JioQKBgQD1RRH2CMn7Z5AW8ec6\n0BCtAw++XVMDU10R0uyvKKk693SvelS+AzB5V5hzH9fmEeaS5BuTffNQRR8xcxd+\nmT+BLzepXD7orzvs1ZCS8HXla7Durl/qFFmBK9Wo2kkoQAKpLYuiSHcRqDON6BFA\nhC70bUDjMItbjzEOGclCvuO7qQKBgQDUQFHyomZR/6g29nLh016DXDOMruFDkX6m\npigcbbUHcGxVvAuR1Q3BHVpyRE1dMF/6w+RyCcvXXyUi0LHtEAS6LSnJAH45fe7U\nUTqN8Pa2/lZi6mT0yRLuVGuyD+1+iFlNh53JOnAtAE9L9pgCDn0l5qy7kxhiRHnD\nUL76dLiykQKBgHW5EUXmMgxZSO+6bCHufBKOxZ+5a37NJH7JnpD0E0YaQAd5z/Lj\n1QBo6uNXBWmIbgNTOWkxqvd8NdymQUCijbiT0UOY4xkMAtdKKnpcsDnN1r65M5BG\n9C7ru0GwhCytjJlnIv5hicUP1q7mFGHDEEaBqgNh6YGo2QLLna5LsUMBAoGAUj0t\nw1Z7UNA/LDSnZKqSV1F1Q9BKxfRs30NIDWPQnbZIs5tt3C5x6t5luhqO40moFrCq\nJil3itZ5vBiiqBjpy/1N0GzZe4s465khl/fCkDrR2/e38ESsih25sL+NJNbNy0V9\ntIdpCXayQtukID/e672KNg+ThhfEGhKCPObW3ZECgYEAxie+o3ZNu3Rut+I4r80c\nDK+yEFWWmyY3xnbyqq2YorsQ9GrzpB18LAJWj50Y5sIhZ5D7zDd9VOpUxCwnU1lv\nN1VfhzsxDW0nFd3otX67r+q65HuGxGhQgpydGCwenvAu/4k1TFsIOUliqKFt3b6O\n6qcfWC+j33Tr3jJlra+sTtc=\n-----END PRIVATE KEY-----\n
+FIREBASE_ADMIN_CONFIG_client_email=firebase-adminsdk-hjguv@cinemov-compfest.iam.gserviceaccount.com
+FIREBASE_ADMIN_CONFIG_client_id=117778003433827725797
+FIREBASE_ADMIN_CONFIG_auth_uri=https://accounts.google.com/o/oauth2/auth
+FIREBASE_ADMIN_CONFIG_token_uri=https://oauth2.googleapis.com/token
+FIREBASE_ADMIN_CONFIG_auth_provider_x509_cert_url=https://www.googleapis.com/oauth2/v1/certs
+FIREBASE_ADMIN_CONFIG_client_x509_cert_url=https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-hjguv%40cinemov-compfest.iam.gserviceaccount.com
+
+```
+
+</details>
+```
